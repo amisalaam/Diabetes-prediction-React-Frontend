@@ -2,9 +2,40 @@ import React, { useEffect, useState } from "react";
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import LoginImg from "../assets/Authentication/login2.jpg";
 import Logo from "../assets/Authentication/logo.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate()
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRepassword] = useState("");
+
+  const submitRegister = async (e) => {
+    e.preventDefault();
+
+    if (password === rePassword) {
+      const response = await fetch(`${API_URL}/register/api/user/registration/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          password
+        })
+      });
+
+      if (response.status === 200) {
+        return navigate('/login');
+      } else {
+        console.log('Registration failed');
+      }
+    } else {
+      console.log('Passwords do not match');
+    }
+  };
 
   // Function to toggle dark mode
   const toggleDarkMode = () => {
@@ -76,7 +107,7 @@ const Register = () => {
                       </h4>
                     </div>
 
-                    <form>
+                    <form onSubmit={submitRegister}>
                       <p className="mb-4 text-center text-neutral-800 dark:text-neutral-200">
                         Please login to your account
                       </p>
@@ -84,9 +115,19 @@ const Register = () => {
                       <div className="mb-4">
                         <input
                           type="text"
+                          className="block w-full px-4 py-2 rounded border border-neutral-400 dark:border-neutral-600 bg-transparent focus:outline-none focus:ring focus:border-primary-500 dark:focus:border-primary-500 placeholder-neutral-500 dark:placeholder-neutral-300 text-neutral-700 dark:text-neutral-300"      
+                          aria-required
+                          placeholder="Name"
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <input
+                          type="email"
                           className="block w-full px-4 py-2 rounded border border-neutral-400 dark:border-neutral-600 bg-transparent focus:outline-none focus:ring focus:border-primary-500 dark:focus:border-primary-500 placeholder-neutral-500 dark:placeholder-neutral-300 text-neutral-700 dark:text-neutral-300"
-                          id="exampleFormControlInput1"
-                          placeholder="Username"
+                          
+                          placeholder="Email"
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
 
@@ -95,39 +136,39 @@ const Register = () => {
                         <input
                           type="password"
                           className="block w-full px-4 py-2 rounded border border-neutral-400 dark:border-neutral-600 bg-transparent focus:outline-none focus:ring focus:border-primary-500 dark:focus:border-primary-500 placeholder-neutral-500 dark:placeholder-neutral-300 text-neutral-700 dark:text-neutral-300"
-                          id="exampleFormControlInput11"
                           placeholder="Password"
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <input
+                          type="password"
+                          className="block w-full px-4 py-2 rounded border border-neutral-400 dark:border-neutral-600 bg-transparent focus:outline-none focus:ring focus:border-primary-500 dark:focus:border-primary-500 placeholder-neutral-500 dark:placeholder-neutral-300 text-neutral-700 dark:text-neutral-300"
+                          onChange={(e) => setRepassword(e.target.value)}
+                          placeholder="Confirm Password"
                         />
                       </div>
 
                       {/* Submit button */}
                       <div className="mb-6 text-center">
                         <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-10 rounded-full shadow-md transition-transform transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-300">
-                          Log In
+                          Register
                         </button>
                       </div>
 
                       {/* Forgot password link */}
-                      <div className="text-center mb-4">
-                        <a
-                          href="#!"
-                          className="text-primary-500 hover:underline"
-                        >
-                          Forgot password?
-                        </a>
-                      </div>
 
                       {/* Register button */}
                       <div className="flex items-center justify-between">
                         <p className="text-neutral-800 dark:text-neutral-200">
-                          Don't have an account?
+                          Already have an account?
                         </p>
-                        <button
-                          type="button"
+                        <Link
+                          to="/login"
                           className="px-4 py-2 bg-transparent border border-danger text-danger-600 rounded hover:bg-danger-100 hover:text-danger-700 focus:outline-none focus:border-danger-600 focus:text-danger-600 dark:border-danger-400 dark:hover:bg-danger-100 dark:hover:text-danger-700 dark:focus:border-danger-400 dark:focus:text-danger-600"
                         >
-                          Register
-                        </button>
+                          Login
+                        </Link>
                       </div>
                     </form>
                   </div>

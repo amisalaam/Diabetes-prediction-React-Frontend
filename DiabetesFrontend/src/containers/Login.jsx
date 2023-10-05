@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import LoginImg from "../assets/Authentication/login2.jpg";
 import Logo from "../assets/Authentication/logo.png";
-import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -43,7 +43,7 @@ const Login = () => {
   return (
 
     <div className="gradient-form h-screen bg-neutral-300 dark:bg-neutral-700">
-        <Navbar/>
+       
       <div
         className={`gradient-form  ${
           isDarkMode ? "dark:bg-emerald-700" : "bg-emerald-200"
@@ -125,12 +125,12 @@ const Login = () => {
                         <p className="text-neutral-800 dark:text-neutral-200">
                           Don't have an account?
                         </p>
-                        <button
-                          type="button"
+                        <Link
+                          to='/register'
                           className="px-4 py-2 bg-transparent border border-danger text-danger-600 rounded hover:bg-danger-100 hover:text-danger-700 focus:outline-none focus:border-danger-600 focus:text-danger-600 dark:border-danger-400 dark:hover:bg-danger-100 dark:hover:text-danger-700 dark:focus:border-danger-400 dark:focus:text-danger-600"
                         >
                           Register
-                        </button>
+                        </Link>
                       </div>
                     </form>
                   </div>
