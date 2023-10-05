@@ -1,16 +1,11 @@
-
-
+import Login from "./containers/Login";
 
 function App() {
-  
-
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    </>
-  )
+    <div>
+      <Login />
+    </div>
+  );
 }
 
-export default App
+export default App;
