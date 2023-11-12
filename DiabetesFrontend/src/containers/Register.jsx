@@ -79,7 +79,7 @@ const Register = () => {
       >
         {/* ... (Rest of your JSX) */}
       </div>
-      <div className="min-h-screen flex justify-center items-center px-20 ">
+      <div className="min-h-screen flex justify-center items-center px-20 mx-auto max-w-screen-2xl">
         <div className="g-6 flex    text-neutral-800 dark:text-neutral-200">
           <div className="w-full">
             <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
