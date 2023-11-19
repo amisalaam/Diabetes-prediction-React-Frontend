@@ -1,13 +1,15 @@
-import Login from "./containers/Login";
+import Login from "./pages/Login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Register from "./containers/Register";
-import Home from "./containers/Home";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
 import { Provider } from "react-redux";
 import store from "./store";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <Provider store={store}>
+    <ToastContainer/>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
